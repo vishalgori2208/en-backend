@@ -30,6 +30,13 @@ function sendEmail(name, phone, query) {
     })
 }
 
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        status:'Success',
+        message:'Your api is working fine'
+    })
+})
+
 app.post("/save", (req, res) => {
     // res.setHeader('Content-Type', 'application/json');
     const name = req.body.name;
