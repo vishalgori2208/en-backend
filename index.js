@@ -37,12 +37,12 @@ app.get('/',(req,res)=>{
     })
 })
 
-app.post("/save", (req,res) => {
+app.post("/save", async(req,res) => {
     const name = req.body.name;
     const phone = req.body.phone;
     const query = req.body.query;
     console.log(name + " " + phone + " " + query);
-    sendEmail(name,phone,query);
+    await sendEmail(name,phone,query);
     res.send("success");
 })
 
