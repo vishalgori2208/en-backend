@@ -26,6 +26,13 @@ const sendEmail = async (name, phone, query) => {
     await transporter.sendMail(mailOptions);
 }
 
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        status:'Success',
+        message:'Your api is working fine'
+    })
+})
+
 app.post("/save", async (req, res) => {
     const name = req.body.name;
     const phone = req.body.phone;
@@ -40,6 +47,13 @@ app.post("/save", async (req, res) => {
     }
     
 })
+
+app.all('*',(req,res)=>{
+    res.status(400).json({
+        status:'fail',
+        message:'An unexpected error has occured'
+    })
+});
 
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
