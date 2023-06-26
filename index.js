@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const sendEmail = async (name, phone, query) => {
+async function sendEmail(name, phone, query) {
     let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -31,20 +31,13 @@ const sendEmail = async (name, phone, query) => {
     })
 }
 
-app.get('/',(req,res)=>{
-    res.status(200).json({
-        status:'Success',
-        message:'Your api is working fine'
-    })
-})
-
-app.post("/save", async(req, res) => {
+app.post("/save", async (req, res) => {
     const name = req.body.name;
     const phone = req.body.phone;
     const query = req.body.query;
     console.log(name + " " + phone + " " + query);
     try {
-        await sendEmail(name, phone, query);
+        sendEmail(name, phone, query);
         res.send("success");
     }
     catch(err){
@@ -52,13 +45,6 @@ app.post("/save", async(req, res) => {
     }
     
 })
-
-app.all('*',(req,res)=>{
-    res.status(400).json({
-        status:'fail',
-        message:'An unexpected error has occured'
-    })
-});
 
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
