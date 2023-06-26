@@ -31,13 +31,13 @@ function sendEmail(name, phone, query) {
 }
 
 app.post("/save", (req, res) => {
+    // res.setHeader('Content-Type', 'application/json');
     const name = req.body.name;
     const phone = req.body.phone;
     const query = req.body.query;
     console.log(name + " " + phone + " " + query);
     try {
         sendEmail(name, phone, query);
-        res.send("success");
         res.status(200).json({
             status: 'success',
             message: 'Mail sent successfully'
