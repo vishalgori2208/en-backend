@@ -11,8 +11,8 @@ function sendEmail(name, phone, query){
     let transporter = nodemailer.createTransport({
         service:"gmail",
         auth:{
-            user:"2021.vishal.gori@ves.ac.in",
-            pass:"fdhtpejbnptgfswp"
+            user:process.env.EMAIL_USER,
+            pass:process.env.EMAIL_PASSWORD
         }
     });
     let mailOptions = {
